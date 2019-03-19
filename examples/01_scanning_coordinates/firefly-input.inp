@@ -1,0 +1,65 @@
+ $contrl
+	scftyp=MCSCF
+	runtyp=ENERGY
+	exetyp=RUN
+	coord=UNIQUE
+	units=BOHR
+	wide=.T.
+	d5=.T.
+    maxit=300
+	mplevl=2
+    inttyp=hondo
+ $end
+
+ $control icut=12 $end
+ $mp2 cutoff=1d-20 $end
+ $mcscf acurcy=1d-7 $end
+ $gugdia cvgtol=1d-8 $end
+ $gugdm2 cutoff=1d-20 $end
+ $gugem cutoff=1d-20 $end
+
+ $system timlim=9000 memory=100000000 np=10 $end
+ $smp smppar=.T. $end
+ $p2p p2p=.T. dlb=.T. $end
+ $basis extfil=.T. gbasis=acc-pvdz $end
+ $guess
+    guess=moread
+    norb=268
+    norder=0
+ $end
+ $mcscf
+    cistep=guga
+    soscf=.t.
+    focas=.f.
+    maxit=1500
+    sd=.t.
+    ntrack=13
+ $end
+ $drt
+    fors=.t.
+    nmcc=34
+    ndoc=3
+    nval=4
+    group=c1
+ $end
+ $gugdia
+    nstate=20
+    itermx=1000
+ $end
+ $gugdm2
+    wstate(1)=1,1,1,1,1,1,1,1,1,1,1,-0
+ $end
+ $XMCQDPT
+    NSTATE=20
+    WSTATE(1)=1,1,1,1,1,1,1,1,1,1,1,-0
+    edshft=0.02
+    istsym=-1
+ $end
+ $gugem pack2=.T. $end
+ $ciinp castrf=.T. $end
+ $MOORTH NOSTF=.T. NOZERO=.T. tole=0 tolz=0 $END
+ $MOORTH SYMS=.T. SYMDEN=.T. SYMVEC=.T. SYMVX=.T. $END
+ $trans dirtrf=.T. mptran=2 altpar=.T. mode=0 cuttrf=1d-13 $end
+ $data
+1,2,3,4-TFBz
+C1
